@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommCoach – The Art of Speaking - Learn & Earn Certificates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        header h1 {
+            letter-spacing: 1px;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 3.2em;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .module-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .module-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .module-card p {
+            margin-bottom: 15px;
+            opacity: 0.95;
+            font-size: 0.95em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4ade80;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-content {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .lesson-content h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .lesson-content p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .module-overview {
+            background: #e3f2fd;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .module-overview h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .module-overview p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .benefits-list {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .benefits-list h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .benefits-list ul {
+            margin-left: 20px;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .question {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question h4 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .results {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .results h2 {
+            font-size: 3.2em;
+            margin-bottom: 10px;
+        }
+
+        .results h3 {
+            font-size: 2em;
+            margin: 15px 0;
+        }
+
+        .results p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .certificate-container {
+            margin: 40px 0;
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border: 8px solid #b8860b;
+            padding: 60px 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            max-width: 900px;
+            page-break-inside: avoid;
+            position: relative;
+        }
+
+        .certificate::before {
+            content: '✓';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .certificate-header {
+            color: #8b4513;
+            font-size: 3.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+
+        .certificate-subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .certificate-text {
+            color: #333;
+            font-size: 1.2em;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .certificate-name {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #8b4513;
+            margin: 40px 0;
+            border-bottom: 3px solid #8b4513;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .certificate-achievement {
+            background: rgba(255,255,255,0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .certificate-achievement h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .certificate-achievement ul {
+            text-align: left;
+            margin-left: 30px;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .certificate-score {
+            font-size: 1.5em;
+            color: #8b4513;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .certificate-quote {
+            font-style: italic;
+            color: #666;
+            margin: 30px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .certificate-footer {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .certificate-footer-item {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px solid #8b4513;
+        }
+
+        .certificate-footer-label {
+            font-weight: bold;
+            color: #8b4513;
+            margin-top: 10px;
+        }
+
+        .certificate-seal {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            border: 3px solid #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            background: rgba(255,193,7,0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .number {
+            font-size: 3.2em;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .timer {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .info-box strong {
+            color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+            letter-spacing: 1px;
+                font-size: 1.8em;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .roadmap {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate {
+                padding: 30px 20px;
+            }
+
+            .certificate-name {
+                font-size: 1.8em;
+            }
+
+            .certificate-footer {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button-group button {
+                width: 100%;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .button-group {
+                display: none;
+            }
+
+            .certificate {
+                box-shadow: none;
+                border: none;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 CommCoach – The Art of Speaking</h1>
+            <p>Enhance your speaking confidence through step-by-step learning and continuous practice.</p>
+            <div class="nav-buttons">
+                <button class="btn-primary" onclick="showSection('home')">🏠 Home</button>
+                <button class="btn-primary" onclick="showSection('roadmap')">🗺️ Roadmap</button>
+                <button class="btn-primary" onclick="showSection('daily-exam')">📝 Daily Exam</button>
+                <button class="btn-primary" onclick="showSection('mock-test')">🧪 Mock Test</button>
+                <button class="btn-primary" onclick="showSection('progress')">📊 Progress</button>
+            </div>
+        </header>
+
+        <div id="home" class="content active">
+            <div class="section">
+                <h2>Welcome to Your Communication Skills Journey! 🚀</h2>
+                <p style="margin-top: 15px; font-size: 1.1em; line-height: 1.8; color: #555;">Great communication is one of the most valuable skills in today's world. Whether you're presenting in a boardroom, having difficult conversations, or writing professional emails, mastering communication can transform your career and relationships.</p>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <h4>Modules</h4>
+                        <div class="number">5</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Daily Lessons</h4>
+                        <div class="number">30+</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Total Questions</h4>
+                        <div class="number">150+</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Certificates</h4>
+                        <div class="number">1</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">🎓 What You'll Learn:</h3>
+                <div class="lesson-content">
+                    <h4>✅ Module 1: Active Listening</h4>
+                    <p>Learn to truly hear what others say, understand non-verbal cues, and respond thoughtfully.</p>
+                </div>
+                <div class="lesson-content">
+                    <h4>✅ Module 2: Effective Speaking</h4>
+                    <p>Master presentation skills, public speaking techniques, and how to articulate your ideas clearly.</p>
+                </div>
+                <div class="lesson-content">
+                    <h4>✅ Module 3: Body Language & Non-Verbal</h4>
+                    <p>Understand how posture, gestures, and facial expressions enhance your message.</p>
+                </div>
+                <div class="lesson-content">
+                    <h4>✅ Module 4: Professional Writing</h4>
+                    <p>Write emails, reports, and documents that are clear, concise, and professional.</p>
+                </div>
+                <div class="lesson-content">
+                    <h4>✅ Module 5: Conflict Resolution</h4>
+                    <p>Navigate difficult conversations and resolve disagreements with empathy and respect.</p>
+                </div>
+
+                <button class="btn-primary" onclick="showSection('roadmap')" style="width: 100%; margin-top: 30px; padding: 15px; font-size: 1.1em;">Start Your Journey →</button>
+            </div>
+        </div>
+
+        <div id="roadmap" class="content">
+            <div class="section">
+                <h2>📚 Your Learning Roadmap</h2>
+                <p style="margin: 15px 0; color: #666;">Click on any module card to view detailed information about that skill, then test your knowledge with daily exams and mock tests!</p>
+                
+                <div class="roadmap">
+                    <div class="module-card" onclick="startModule(1)">
+                        <h3>🎤 Module 1</h3>
+                        <p>Active Listening</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-1" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-secondary">View Details →</button>
+                    </div>
+
+                    <div class="module-card" onclick="startModule(2)">
+                        <h3>🗣️ Module 2</h3>
+                        <p>Effective Speaking</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-2" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-secondary">View Details →</button>
+                    </div>
+
+                    <div class="module-card" onclick="startModule(3)">
+                        <h3>👥 Module 3</h3>
+                        <p>Body Language</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-3" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-secondary">View Details →</button>
+                    </div>
+
+                    <div class="module-card" onclick="startModule(4)">
+                        <h3>📄 Module 4</h3>
+                        <p>Professional Writing</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-4" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-secondary">View Details →</button>
+                    </div>
+
+                    <div class="module-card" onclick="startModule(5)">
+                        <h3>⚔️ Module 5</h3>
+                        <p>Conflict Resolution</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-5" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-secondary">View Details →</button>
+                    </div>
+                </div>
+
+                <div id="module-details" class="section" style="margin-top: 30px; display: none;">
+                    <button class="btn-secondary" onclick="document.getElementById('module-details').style.display='none'" style="margin-bottom: 20px;">← Back to Modules</button>
+                    <div id="module-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="daily-exam" class="content">
+            <div class="section">
+                <h2>📝 Daily Exam</h2>
+                <p style="margin: 15px 0; color: #666;">Complete 5 questions daily to track your progress!</p>
+
+                <div class="input-group" id="user-name-input">
+                    <label>Your Name</label>
+                    <input type="text" id="user-name" placeholder="Enter your name">
+                </div>
+
+                <div id="quiz-area" style="display: none;">
+                    <div class="timer" id="timer"></div>
+                    <div class="quiz-container" id="daily-quiz"></div>
+                    <button class="submit-btn" onclick="submitDailyQuiz()">Submit Quiz</button>
+                </div>
+
+                <button class="btn-primary" id="start-daily-btn" onclick="startDailyQuiz()" style="width: 100%; padding: 15px; font-size: 1.1em;">Start Daily Exam</button>
+            </div>
+
+            <div id="daily-results" class="section" style="display: none;">
+                <div id="daily-result-content"></div>
+                <button class="btn-primary" onclick="location.reload()" style="width: 100%; margin-top: 20px; padding: 15px;">Start New Exam</button>
+            </div>
+        </div>
+
+        <div id="mock-test" class="content">
+            <div class="section">
+                <h2>🧪 Mock Test (Comprehensive)</h2>
+                <p style="margin: 15px 0; color: #666;">50 questions covering all modules. 60 minutes. Score 70%+ to get certified!</p>
+
+                <div class="info-box">
+                    <strong>ℹ️ Important:</strong> You need to score 70% or higher to earn your course completion certificate and official credentials.
+                </div>
+
+                <div class="input-group" id="mock-user-input">
+                    <label>Your Name (for Certificate)</label>
+                    <input type="text" id="mock-user-name" placeholder="Enter your full name">
+                </div>
+
+                <div id="mock-quiz-area" style="display: none;">
+                    <div class="timer" id="mock-timer"></div>
+                    <div class="quiz-container" id="mock-quiz"></div>
+                    <button class="submit-btn" onclick="submitMockTest()">Submit Mock Test</button>
+                </div>
+
+                <button class="btn-primary" id="start-mock-btn" onclick="startMockTest()" style="width: 100%; padding: 15px; font-size: 1.1em;">Start Mock Test (60 min)</button>
+            </div>
+
+            <div id="mock-results" class="section" style="display: none;">
+                <div id="mock-result-content"></div>
+                <div class="button-group">
+                    <button class="btn-primary" id="download-cert-btn" onclick="downloadCertificate()" style="display: none;">📥 Download & Print Certificate</button>
+                    <button class="btn-primary" id="print-cert-btn" onclick="printCertificate()" style="display: none;">🖨️ Print Certificate</button>
+                    <button class="btn-secondary" onclick="location.reload()">Take Test Again</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="progress" class="content">
+            <div class="section">
+                <h2>📊 Your Progress Dashboard</h2>
+                
+                <div class="stats" style="margin-top: 20px;">
+                    <div class="stat-card">
+                        <h4>Daily Exams Completed</h4>
+                        <div class="number" id="exams-completed">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Average Score</h4>
+                        <div class="number" id="avg-score">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Modules Completed</h4>
+                        <div class="number" id="modules-completed">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Certificates Earned</h4>
+                        <div class="number" id="certs-earned">0</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">Module Progress</h3>
+                <div id="module-progress-list"></div>
+
+                <div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 10px; border-left: 4px solid #667eea;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">💡 Tips for Success:</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Take the daily exam consistently to build habits</li>
+                        <li>Review your weak areas before taking the mock test</li>
+                        <li>Practice the communication tips in real-life situations</li>
+                        <li>Share your certificates on social media to inspire others</li>
+                        <li>Revisit modules monthly to keep skills fresh</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const moduleData = {
+            1: {
+                icon: '🎤',
+                name: 'Active Listening',
+                overview: 'Active listening is the foundation of effective communication. It means fully concentrating on what the other person is saying, understanding their message, and responding thoughtfully. When you truly listen, you build trust, strengthen relationships, and gain valuable insights.',
+                benefits: ['Build stronger relationships', 'Understand others\' perspectives', 'Reduce conflicts and misunderstandings', 'Gain trust and respect', 'Improve problem-solving abilities', 'Enhance emotional intelligence'],
+                lessons: [
+                    { 
+                        title: '1. Focus on the Speaker', 
+                        content: 'Give your full attention to the speaker without distractions. Put away your phone, minimize background noise, and make the person feel heard. Maintain eye contact, nod occasionally, and show through your body language that you are engaged. This shows respect and encourages the speaker to open up more fully.' 
+                    },
+                    { 
+                        title: '2. Avoid Interrupting', 
+                        content: 'Let the speaker finish their thoughts completely before you respond. Interrupting can make people feel unheard and disrupts the flow of communication. Even if you think you know what they are going to say, wait for them to complete their thoughts. Practice patience and resist the urge to plan your reply while they are still speaking.' 
+                    },
+                    { 
+                        title: '3. Use Body Language', 
+                        content: 'Show engagement through your body language. Lean slightly forward, maintain open posture, use natural gestures, and nod to show understanding. Your facial expressions should reflect interest and concern. Remember that about 55% of communication is non-verbal, so your body language is just as important as your words.' 
+                    },
+                    { 
+                        title: '4. Ask Clarifying Questions', 
+                        content: 'After the speaker finishes, ask thoughtful questions to show you were genuinely engaged and to clarify any misunderstandings. Questions like "What did you mean by...?" or "Can you give me an example?" demonstrate interest and ensure you fully understand their perspective.' 
+                    }
+                ]
+            },
+            2: {
+                icon: '🗣️',
+                name: 'Effective Speaking',
+                overview: 'Effective speaking is the ability to communicate your ideas clearly, confidently, and persuasively to your audience. Whether in a boardroom, classroom, or social setting, strong speaking skills can influence decisions, inspire action, and help you achieve your goals. Great speakers combine preparation, confidence, and authentic engagement.',
+                benefits: ['Influence and persuade others', 'Build confidence and credibility', 'Present ideas clearly and persuasively', 'Advance your career', 'Inspire and motivate audiences', 'Overcome presentation anxiety'],
+                lessons: [
+                    { 
+                        title: '1. Structure Your Ideas', 
+                        content: 'Organize your thoughts before speaking. Use a clear beginning, middle, and end structure. Start with an engaging hook that captures attention, develop your main points with supporting evidence, and conclude with a strong summary that reinforces your message. A well-structured speech is easier to follow and more memorable.' 
+                    },
+                    { 
+                        title: '2. Speak with Confidence', 
+                        content: 'Speak at a moderate pace, enunciate clearly, and use appropriate volume. Vary your tone to maintain interest and avoid a monotonous delivery. Confidence comes from preparation - practice your speech multiple times until you are familiar with the material. Stand tall, make eye contact, and use natural hand gestures to emphasize your points.' 
+                    },
+                    { 
+                        title: '3. Use Relevant Examples', 
+                        content: 'Support your points with real-world examples, stories, statistics, and case studies. Examples make abstract concepts concrete and memorable for your audience. Stories are particularly powerful as they create emotional connections and help people remember your message long after your speech ends.' 
+                    },
+                    { 
+                        title: '4. Engage Your Audience', 
+                        content: 'Ask rhetorical questions, encourage participation, and involve your audience directly. Vary your tone, pace, and delivery to keep people interested. Make eye contact with different audience members, smile when appropriate, and respond to their energy. An engaged audience is more likely to remember and act on your message.' 
+                    }
+                ]
+            },
+            3: {
+                icon: '👥',
+                name: 'Body Language & Non-Verbal Communication',
+                overview: 'Body language and non-verbal communication are powerful tools that can enhance or undermine your message. Research shows that 55% of communication is conveyed through body language, 38% through tone of voice, and only 7% through words. Mastering non-verbal communication means being aware of your posture, gestures, facial expressions, and energy to ensure they align with your message.',
+                benefits: ['Convey confidence and competence', 'Build rapport and trust', 'Enhance your message clarity', 'Manage others\' perceptions', 'Improve personal presence', 'Read others\' emotions and intentions'],
+                lessons: [
+                    { 
+                        title: '1. Maintain Good Posture', 
+                        content: 'Stand or sit upright with your shoulders back and your head up. Good posture conveys confidence, respect, and self-assurance. Avoid slouching, which can signal disinterest, low confidence, or lack of engagement. Whether you\'re sitting in a meeting or standing during a presentation, your posture communicates volumes about your attitude and professionalism.' 
+                    },
+                    { 
+                        title: '2. Use Natural Gestures', 
+                        content: 'Gestures should be natural and emphasize your points without being distracting. Avoid crossing your arms (appears defensive or closed off) or keeping your hands in your pockets (suggests uncertainty). Use open hand movements to appear approachable and confident. Keep your gestures above your waist and within a reasonable distance from your body.' 
+                    },
+                    { 
+                        title: '3. Be Aware of Facial Expressions', 
+                        content: 'Your face reveals your emotions and intentions. Smile when appropriate to appear warm and approachable, raise your eyebrows to show interest and surprise, and nod to demonstrate agreement and engagement. Keep your expression genuine and aligned with your message - a fake smile can undermine your credibility.' 
+                    },
+                    { 
+                        title: '4. Mirror the Energy', 
+                        content: 'Subtly match the energy, pace, and body language of the person you\'re communicating with. This builds rapport and shows you\'re engaged in the conversation. However, avoid obvious mimicking, which can appear insincere. Mirroring shows empathy and creates a sense of connection and understanding.' 
+                    }
+                ]
+            },
+            4: {
+                icon: '📄',
+                name: 'Professional Writing',
+                overview: 'Professional writing is the ability to communicate clearly, concisely, and persuasively through written documents such as emails, reports, proposals, and letters. Strong writing skills are essential in today\'s workplace as most business communication happens in written form. Professional writing requires attention to clarity, tone, structure, and accuracy.',
+                benefits: ['Communicate ideas clearly in writing', 'Build your professional reputation', 'Increase response rates to emails', 'Save time through clear communication', 'Reduce misunderstandings', 'Advance career opportunities'],
+                lessons: [
+                    { 
+                        title: '1. Keep Emails Concise', 
+                        content: 'Get to the point quickly in professional emails. Use short paragraphs, bullet points when appropriate, and white space to make the message easy to scan. Respect the reader\'s time - most professionals receive hundreds of emails daily. Lead with the most important information and save details for the body of the email.' 
+                    },
+                    { 
+                        title: '2. Use Appropriate Tone', 
+                        content: 'Match your writing tone to your audience and purpose. Professional writing should be courteous, clear, and formal when needed. Avoid slang, texting language, and overly casual language in professional contexts. Use active voice, positive language, and avoid negative or accusatory tones. Your tone should reflect respect for the reader.' 
+                    },
+                    { 
+                        title: '3. Proofread Before Sending', 
+                        content: 'Always proofread for grammar, spelling, and punctuation errors. Use spell-check tools and read your message aloud to catch mistakes and awkward phrasing. Errors can undermine your credibility and professionalism. Take extra time with important communications like job applications, proposals, and client correspondence.' 
+                    },
+                    { 
+                        title: '4. Use Clear Subject Lines', 
+                        content: 'Write descriptive subject lines that summarize the email content in 5-7 words. This helps recipients prioritize emails and find them later in their inbox. Instead of "Update," write "Q3 Sales Report - Awaiting Your Feedback." A clear subject line increases the likelihood that your email will be read promptly.' 
+                    }
+                ]
+            },
+            5: {
+                icon: '⚔️',
+                name: 'Conflict Resolution',
+                overview: 'Conflict is inevitable in any relationship or workplace, but how you handle disagreements determines the outcome. Conflict resolution is the process of addressing differences constructively to reach mutually beneficial solutions. Effective conflict resolution requires listening, empathy, respect, and a commitment to finding common ground and win-win solutions.',
+                benefits: ['Resolve disagreements peacefully', 'Strengthen relationships', 'Improve team dynamics', 'Reduce stress and tension', 'Find creative solutions', 'Build trust and respect'],
+                lessons: [
+                    { 
+                        title: '1. Listen to Understand', 
+                        content: 'In conflicts, listen to the other person\'s perspective without planning your rebuttal or becoming defensive. Understanding their viewpoint is the first step toward resolution. Ask clarifying questions and show genuine interest in their concerns. Often, people just want to feel heard and understood before they can move toward solving the problem.' 
+                    },
+                    { 
+                        title: '2. Stay Calm and Respectful', 
+                        content: 'Keep your emotions in check during disagreements. Speak in a calm, respectful tone, avoid personal attacks or blame, and show respect for the other person\'s opinions even if you disagree. Take breaks if the conversation becomes too heated. Remember that your goal is to resolve the conflict, not to win or prove someone wrong.' 
+                    },
+                    { 
+                        title: '3. Find Common Ground', 
+                        content: 'Look for areas of agreement to build from. Often people disagree on details but share common goals or values. Start conversations by identifying these shared interests and working from there. Common ground provides a foundation for finding solutions that work for everyone involved.' 
+                    },
+                    { 
+                        title: '4. Work Toward Win-Win Solutions', 
+                        content: 'Seek solutions where both parties benefit, rather than a "winner takes all" mentality. Compromise and collaboration often lead to stronger relationships and better outcomes. Ask "What would an ideal solution look like for you?" and explore creative options that address both people\'s core needs and concerns.' 
+                    }
+                ]
+            }
+        };
+
+        const dailyQuestions = [
+            { q: 'What is the most important aspect of active listening?', o: ['Focus without interrupting', 'Thinking of your reply', 'Speaking clearly', 'Making eye contact'], a: 0 },
+            { q: 'In professional writing, what should you prioritize?', o: ['Word count', 'Clarity and conciseness', 'Complex vocabulary', 'Formal tone'], a: 1 },
+            { q: 'What does body language communicate?', o: ['Only nervousness', 'Only confidence', 'About 55% of communication', 'Nothing important'], a: 2 },
+            { q: 'How should you handle conflict?', o: ['Avoid the person', 'Listen and seek understanding', 'Always be right', 'Give up easily'], a: 1 },
+            { q: 'What improves public speaking skills?', o: ['Avoiding practice', 'Regular practice and feedback', 'Speaking fast', 'No preparation'], a: 1 }
+        ];
+
+        const mockTestQuestions = [
+            ...dailyQuestions,
+            { q: 'What is a key component of effective listening?', o: ['Waiting for your turn', 'Full attention', 'Note-taking only', 'Interrupting'], a: 1 },
+            { q: 'How should you structure a professional email?', o: ['Random order', 'Clear subject, greeting, body, closing', 'No subject line', 'Longest sentences'], a: 1 },
+            { q: 'What does mirroring mean in communication?', o: ['Using mirrors', 'Reflecting others\' body language', 'Copying speech', 'None'], a: 1 },
+            { q: 'Best practice for handling disagreement?', o: ['Ignore it', 'Seek to understand', 'Win at all costs', 'Walk away'], a: 1 },
+            { q: 'What makes a presentation engaging?', o: ['Long slides', 'Audience interaction', 'Technical jargon', 'No visuals'], a: 1 },
+            { q: 'How should you respond to criticism?', o: ['Defend yourself', 'Listen and learn', 'Ignore it', 'Attack back'], a: 1 },
+            { q: 'What\'s the ideal pace for public speaking?', o: ['Very fast', 'Very slow', 'Moderate with pauses', 'No pauses'], a: 2 },
+            { q: 'Which improves written communication?', o: ['Longer sentences', 'Proofreading', 'Slang', 'Unclear words'], a: 1 },
+            { q: 'Best time to give feedback is?', o: ['When angry', 'Privately and calmly', 'Publicly', 'Never'], a: 1 },
+            { q: 'Active listening requires?', o: ['Planning your response', 'Full concentration', 'Multitasking', 'Phone checking'], a: 1 },
+            { q: 'How to build trust in conversations?', o: ['Be dishonest', 'Be consistent and honest', 'Avoid eye contact', 'Interrupt'], a: 1 },
+            { q: 'What\'s the rule of 55-38-7?', o: ['Words only matter', '55% body, 38% voice, 7% words', 'All equal', 'No communication rule'], a: 1 },
+            { q: 'How should you handle interruptions?', o: ['React angrily', 'Politely continue', 'Stop speaking', 'Ignore'], a: 1 },
+            { q: 'Best way to remember someone\'s name?', o: ['Don\'t bother', 'Repeat it immediately', 'Write it down', 'Forget it'], a: 1 },
+            { q: 'What helps manage presentation anxiety?', o: ['No practice', 'Deep breathing and practice', 'Avoiding eye contact', 'Rushing'], a: 1 },
+            { q: 'Effective email signature includes?', o: ['No signature', 'Name and contact info', 'Random text', 'Personal quotes'], a: 1 },
+            { q: 'How to show empathy in communication?', o: ['Be cold', 'Understand others\' feelings', 'Only talk about yourself', 'Judge'], a: 1 },
+            { q: 'Best conflict resolution approach?', o: ['Dominate', 'Collaborate and understand', 'Avoid', 'Give in always'], a: 1 },
+            { q: 'What is non-verbal leakage?', o: ['Water leak', 'True emotions showing through', 'Speaking softly', 'Not smiling'], a: 1 },
+            { q: 'How often should you make eye contact?', o: ['Never', '40-60% of the time', 'Always stare', 'Only with friends'], a: 1 },
+            { q: 'Professional communication requires?', o: ['Casual tone always', 'Appropriate tone and language', 'No formality', 'Slang'], a: 1 },
+            { q: 'What breaks trust quickly?', o: ['Honesty', 'Inconsistency', 'Clear communication', 'Listening'], a: 1 },
+            { q: 'Best group communication practice?', o: ['One person talks', 'Everyone participates equally', 'No listening', 'Interruptions'], a: 1 },
+            { q: 'How to give constructive feedback?', o: ['Only criticism', 'Specific, kind, actionable', 'Vague complaints', 'Public shaming'], a: 1 },
+            { q: 'What helps in difficult conversations?', o: ['Avoid emotions', 'Stay calm and respectful', 'Get angry', 'Raise voice'], a: 1 },
+            { q: 'Effective presentation tip?', o: ['Read slides', 'Engage audience', 'No eye contact', 'Fast talking'], a: 1 },
+            { q: 'How to improve listening skills?', o: ['Talk more', 'Practice focused listening', 'Multitask', 'Use phone'], a: 1 },
+            { q: 'Best way to apologize?', o: ['Avoid it', 'Sincere and specific', 'Make excuses', 'Blame others'], a: 1 },
+            { q: 'What\'s active engagement in meetings?', o: ['Daydream', 'Participate and ask questions', 'Sleep', 'Ignore'], a: 1 },
+            { q: 'Professional boundaries help?', o: ['No importance', 'Respect and clarity', 'Everyone can do everything', 'Confusion'], a: 1 },
+            { q: 'How should you handle disagreement diplomatically?', o: ['Fight back', 'Acknowledge and discuss', 'Ignore', 'Yell'], a: 1 },
+            { q: 'Best networking communication tip?', o: ['Be fake', 'Be genuine and interested', 'Talk only about yourself', 'No listening'], a: 1 },
+            { q: 'What improves clarity in speaking?', o: ['Mumbling', 'Clear pronunciation and pausing', 'Fast speech', 'No structure'], a: 1 },
+            { q: 'How to read non-verbal cues?', o: ['Ignore them', 'Observe body language and tone', 'Assume things', 'No observation'], a: 1 },
+            { q: 'Professional email etiquette includes?', o: ['No greeting', 'Proper greeting and closing', 'Slang', 'Emojis always'], a: 1 },
+            { q: 'What\'s the power of pauses in speaking?', o: ['Wastes time', 'Allows understanding', 'Shows weakness', 'Boring'], a: 1 },
+            { q: 'How to handle a difficult audience member?', o: ['Ignore them', 'Stay calm and professional', 'Get defensive', 'Kick them out'], a: 1 },
+            { q: 'Best way to build rapport?', o: ['Be distant', 'Find common interests', 'Only talk about work', 'Be rude'], a: 1 },
+            { q: 'What\'s assertive communication?', o: ['Being aggressive', 'Expressing needs clearly', 'Being passive', 'No communication'], a: 1 },
+            { q: 'How to make feedback actionable?', o: ['Vague statements', 'Specific and clear', 'Emotional', 'No clarity'], a: 1 },
+            { q: 'Professional communication in emails means?', o: ['Very long', 'Concise and clear', 'No structure', 'Random caps'], a: 1 },
+            { q: 'What helps in telephone communication?', o: ['Multi-tasking', 'Full attention', 'Eating', 'No listening'], a: 1 },
+            { q: 'How to improve cross-cultural communication?', o: ['Ignore differences', 'Learn and respect cultures', 'Assume things', 'Be judgmental'], a: 1 },
+            { q: 'Best way to conclude a conversation?', o: ['Abruptly', 'Polite summary and closure', 'No goodbye', 'Rude exit'], a: 1 },
+            { q: 'What\'s the importance of active participation?', o: ['Useless', 'Shows engagement', 'Boring', 'Wastes time'], a: 1 },
+            { q: 'How to handle workplace conflicts?', o: ['Gossip', 'Address privately', 'Ignore', 'Public blame'], a: 1 },
+            { q: 'Best presentation body language?', o: ['Slouching', 'Confident posture', 'Back to audience', 'Nervous movement'], a: 1 },
+            { q: 'What\'s effective summarization?', o: ['Too long', 'Brief and accurate', 'Missing points', 'Wrong info'], a: 1 },
+            { q: 'How to show active interest?', o: ['Be bored', 'Ask questions and nod', 'No response', 'Check phone'], a: 1 }
+        ];
+
+        let currentUser = '';
+        let dailyQuizAnswers = [];
+        let mockQuizAnswers = [];
+        let timerInterval;
+        let mockTestScore = 0;
+        let mockTestPercentage = 0;
+
+        function showSection(section) {
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            if (section === 'progress') updateProgressDashboard();
+            window.scrollTo(0, 0);
+        }
+
+        function startModule(moduleNum) {
+            const module = moduleData[moduleNum];
+            let html = '<h3 style="color: #667eea; font-size: 1.8em; margin-bottom: 20px;">' + module.icon + ' ' + module.name + '</h3>';
+            
+            html += '<div class="module-overview"><h3>📌 About This Module</h3><p>' + module.overview + '</p></div>';
+            
+            html += '<div class="benefits-list"><h5>🎯 Key Benefits of Learning This Skill:</h5><ul>';
+            module.benefits.forEach(benefit => {
+                html += '<li>✓ ' + benefit + '</li>';
+            });
+            html += '</ul></div>';
+            
+            html += '<h4 style="color: #667eea; margin: 30px 0 20px 0; font-size: 1.3em;">📖 Detailed Lessons:</h4>';
+            
+            module.lessons.forEach((lesson, i) => {
+                html += '<div class="lesson-content">';
+                html += '<h4>' + lesson.title + '</h4>';
+                html += '<p>' + lesson.content + '</p>';
+                html += '</div>';
+            });
+            
+            html += '<div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px; border-left: 5px solid #ffc107;">';
+            html += '<h5 style="color: #856404; margin-bottom: 10px;">💡 Pro Tip:</h5>';
+            html += '<p style="color: #856404; margin: 0;">Practice these skills consistently in real-life situations. The more you apply what you learn, the more natural and effective your communication will become. Take the daily exams and mock test to reinforce your knowledge!</p>';
+            html += '</div>';
+            
+            document.getElementById('module-content').innerHTML = html;
+            document.getElementById('module-details').style.display = 'block';
+        }
+
+        function startDailyQuiz() {
+            currentUser = document.getElementById('user-name').value.trim();
+            if (!currentUser) {
+                alert('Please enter your name');
+                return;
+            }
+            document.getElementById('user-name-input').style.display = 'none';
+            document.getElementById('start-daily-btn').style.display = 'none';
+            document.getElementById('quiz-area').style.display = 'block';
+            dailyQuizAnswers = new Array(dailyQuestions.length);
+            renderDailyQuiz();
+            startTimer('timer', 300);
+        }
+
+        function renderDailyQuiz() {
+            let quizHtml = '';
+            dailyQuestions.forEach((q, i) => {
+                quizHtml += '<div class="question"><h4>Question ' + (i + 1) + ': ' + q.q + '</h4><div class="options">';
+                q.o.forEach((opt, j) => {
+                    quizHtml += '<label class="option"><input type="radio" name="q' + i + '" value="' + j + '" onchange="dailyQuizAnswers[' + i + '] = ' + j + '">' + opt + '</label>';
+                });
+                quizHtml += '</div></div>';
+            });
+            document.getElementById('daily-quiz').innerHTML = quizHtml;
+        }
+
+        function submitDailyQuiz() {
+            const answered = dailyQuizAnswers.filter(a => a !== undefined).length;
+            if (answered < dailyQuestions.length) {
+                alert('Please answer all ' + dailyQuestions.length + ' questions');
+                return;
+            }
+            clearInterval(timerInterval);
+            const score = dailyQuizAnswers.reduce((sum, answer, i) => sum + (answer === dailyQuestions[i].a ? 1 : 0), 0);
+            const percentage = Math.round((score / dailyQuestions.length) * 100);
+            saveProgress('daily', percentage);
+            
+            let resultHtml = '<div class="results">';
+            resultHtml += '<h2>🎉 Great Job, ' + currentUser + '!</h2>';
+            resultHtml += '<p>You scored <strong>' + score + '/' + dailyQuestions.length + '</strong></p>';
+            resultHtml += '<h3>' + percentage + '%</h3>';
+            if (percentage >= 80) resultHtml += '<p style="font-size: 1.3em;">⭐ Excellent performance!</p>';
+            else if (percentage >= 60) resultHtml += '<p style="font-size: 1.3em;">👍 Good effort! Keep practicing!</p>';
+            else resultHtml += '<p style="font-size: 1.3em;">💪 Keep learning, you\'ll improve!</p>';
+            resultHtml += '</div>';
+            
+            resultHtml += '<div class="section" style="margin-top: 20px;"><h3>Answer Review:</h3>';
+            dailyQuestions.forEach((q, i) => {
+                resultHtml += '<div class="question">';
+                resultHtml += '<h4>Q' + (i + 1) + ': ' + q.q + '</h4>';
+                resultHtml += '<p><strong>Your answer:</strong> ' + q.o[dailyQuizAnswers[i]] + '</p>';
+                resultHtml += '<p><strong>Correct answer:</strong> ' + q.o[q.a] + '</p>';
+                const isCorrect = dailyQuizAnswers[i] === q.a;
+                resultHtml += '<p style="color: ' + (isCorrect ? '#28a745' : '#dc3545') + '">' + (isCorrect ? '✅ Correct' : '❌ Incorrect') + '</p>';
+                resultHtml += '</div>';
+            });
+            resultHtml += '</div>';
+            
+            document.getElementById('daily-quiz').style.display = 'none';
+            document.getElementById('daily-results').style.display = 'block';
+            document.getElementById('daily-result-content').innerHTML = resultHtml;
+        }
+
+        function startMockTest() {
+            currentUser = document.getElementById('mock-user-name').value.trim();
+            if (!currentUser) {
+                alert('Please enter your full name for the certificate');
+                return;
+            }
+            document.getElementById('mock-user-input').style.display = 'none';
+            document.getElementById('start-mock-btn').style.display = 'none';
+            document.getElementById('mock-quiz-area').style.display = 'block';
+            mockQuizAnswers = new Array(mockTestQuestions.length);
+            renderMockQuiz();
+            startTimer('mock-timer', 3600);
+        }
+
+        function renderMockQuiz() {
+            let quizHtml = '';
+            mockTestQuestions.forEach((q, i) => {
+                quizHtml += '<div class="question"><h4>Question ' + (i + 1) + ': ' + q.q + '</h4><div class="options">';
+                q.o.forEach((opt, j) => {
+                    quizHtml += '<label class="option"><input type="radio" name="m' + i + '" value="' + j + '" onchange="mockQuizAnswers[' + i + '] = ' + j + '">' + opt + '</label>';
+                });
+                quizHtml += '</div></div>';
+            });
+            document.getElementById('mock-quiz').innerHTML = quizHtml;
+        }
+
+        function submitMockTest() {
+            const answered = mockQuizAnswers.filter(a => a !== undefined).length;
+            if (answered < mockTestQuestions.length) {
+                alert('Please answer all ' + mockTestQuestions.length + ' questions');
+                return;
+            }
+            clearInterval(timerInterval);
+            mockTestScore = mockQuizAnswers.reduce((sum, answer, i) => sum + (answer === mockTestQuestions[i].a ? 1 : 0), 0);
+            mockTestPercentage = Math.round((mockTestScore / mockTestQuestions.length) * 100);
+            const passed = mockTestPercentage >= 70;
+            saveProgress('mock', mockTestPercentage);
+            
+            let resultHtml = '';
+            
+            if (passed) {
+                resultHtml += '<div class="results" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">';
+                resultHtml += '<h2>🏆 Congratulations!</h2>';
+            } else {
+                resultHtml += '<div class="results" style="background: #ff6b6b">';
+                resultHtml += '<h2>💪 Keep Trying!</h2>';
+            }
+            
+            resultHtml += '<p>Final Score: <strong>' + mockTestScore + '/' + mockTestQuestions.length + '</strong></p>';
+            resultHtml += '<h3>' + mockTestPercentage + '%</h3>';
+            
+            if (passed) {
+                resultHtml += '<p>✅ You Passed! Certificate awarded!</p>';
+            } else {
+                resultHtml += '<p>❌ Please improve and try again. You need 70% to pass.</p>';
+            }
+            
+            resultHtml += '</div>';
+            
+            if (passed) {
+                resultHtml += generateCertificate();
+            }
+            
+            resultHtml += '<div class="section" style="margin-top: 20px;">';
+            resultHtml += '<h3>Detailed Analysis:</h3>';
+            resultHtml += '<div style="padding: 15px; background: #f9f9f9; border-radius: 8px; margin-bottom: 15px;">';
+            resultHtml += '<p><strong>Total Questions:</strong> ' + mockTestQuestions.length + '</p>';
+            resultHtml += '<p><strong>Correct Answers:</strong> ' + mockTestScore + '</p>';
+            resultHtml += '<p><strong>Wrong Answers:</strong> ' + (mockTestQuestions.length - mockTestScore) + '</p>';
+            resultHtml += '<p><strong>Accuracy:</strong> ' + mockTestPercentage + '%</p>';
+            resultHtml += '<p><strong>Status:</strong> ' + (passed ? '✅ PASSED (Certified!)' : '❌ FAILED (Need 70% to pass)') + '</p>';
+            resultHtml += '</div>';
+            resultHtml += '</div>';
+            
+            document.getElementById('mock-quiz').style.display = 'none';
+            document.getElementById('mock-results').style.display = 'block';
+            document.getElementById('mock-result-content').innerHTML = resultHtml;
+            
+            if (passed) {
+                document.getElementById('download-cert-btn').style.display = 'block';
+                document.getElementById('print-cert-btn').style.display = 'block';
+            } else {
+                document.getElementById('download-cert-btn').style.display = 'none';
+                document.getElementById('print-cert-btn').style.display = 'none';
+            }
+        }
+
+        function generateCertificate() {
+            let certHtml = '<div class="certificate-container">';
+            certHtml += '<div class="certificate" id="certificate-to-print">';
+            certHtml += '<div class="certificate-seal">🏅</div>';
+            certHtml += '<div class="certificate-header">CERTIFICATE OF COMPLETION</div>';
+            certHtml += '<div class="certificate-subtitle">CommCoach – The Art of Speaking Program</div>';
+            certHtml += '<div class="certificate-text">This is to certify that</div>';
+            certHtml += '<div class="certificate-name">' + currentUser + '</div>';
+            certHtml += '<div class="certificate-achievement">';
+            certHtml += '<h4>Has Successfully Completed:</h4>';
+            certHtml += '<ul>';
+            certHtml += '<li>✓ Module 1: Active Listening</li>';
+            certHtml += '<li>✓ Module 2: Effective Speaking</li>';
+            certHtml += '<li>✓ Module 3: Body Language & Non-Verbal Communication</li>';
+            certHtml += '<li>✓ Module 4: Professional Writing</li>';
+            certHtml += '<li>✓ Module 5: Conflict Resolution</li>';
+            certHtml += '<li>✓ Comprehensive Assessment (Mock Test)</li>';
+            certHtml += '</ul>';
+            certHtml += '</div>';
+            certHtml += '<div class="certificate-score">Score: ' + mockTestPercentage + '%</div>';
+            certHtml += '<div class="certificate-quote">"Effective communication is the foundation of success in every aspect of personal and professional life."</div>';
+            certHtml += '<div class="certificate-text">This certificate is awarded in recognition of successful completion of the CommCoach – The Art of Speaking Program and demonstrates proficiency in essential communication competencies.</div>';
+            certHtml += '<div class="certificate-footer">';
+            certHtml += '<div class="certificate-footer-item">';
+            certHtml += '<div>Date of Completion</div>';
+            certHtml += '<div class="certificate-footer-label">' + new Date().toLocaleDateString() + '</div>';
+            certHtml += '</div>';
+            certHtml += '<div class="certificate-footer-item">';
+            certHtml += '<div>Program Level</div>';
+            certHtml += '<div class="certificate-footer-label">ADVANCED CERTIFICATION</div>';
+            certHtml += '</div>';
+            certHtml += '</div>';
+            certHtml += '</div>';
+            certHtml += '</div>';
+            
+            return certHtml;
+        }
+
+        function downloadCertificate() {
+            const certificateHtml = document.getElementById('certificate-to-print').outerHTML;
+            const element = document.createElement('a');
+            const file = new Blob([
+                '<!DOCTYPE html><html><head><title>Certificate - ' + currentUser + '</title><style>' +
+                document.querySelector('style').textContent +
+                'body { margin: 0; padding: 20px; background: white; }' +
+                '</style></head><body>' +
+                certificateHtml +
+                '</body></html>'
+            ], { type: 'text/html' });
+            element.href = URL.createObjectURL(file);
+            element.download = 'Certificate_' + currentUser.replace(/\s/g, '_') + '_' + new Date().getTime() + '.html';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            alert('Certificate downloaded! You can now open it in a browser or print it as PDF.');
+        }
+
+        function printCertificate() {
+            const printWindow = window.open('', '', 'width=1000,height=700');
+            const certificateHtml = document.getElementById('certificate-to-print').outerHTML;
+            printWindow.document.write('<!DOCTYPE html><html><head><title>Certificate - ' + currentUser + '</title><style>');
+            printWindow.document.write(document.querySelector('style').textContent);
+            printWindow.document.write('body { margin: 0; padding: 20px; background: white; }');
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write(certificateHtml);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            setTimeout(() => { printWindow.focus(); printWindow.print(); }, 500);
+        }
+
+        function startTimer(elementId, seconds) {
+            let timeLeft = seconds;
+            const timerEl = document.getElementById(elementId);
+            timerEl.textContent = formatTime(timeLeft);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = formatTime(timeLeft);
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time\'s up!');
+                    if (elementId === 'timer') submitDailyQuiz();
+                    else submitMockTest();
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return '⏱️ Time Left: ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        function saveProgress(type, score) {
+            let progress = JSON.parse(localStorage.getItem('commSkillsProgress') || '{}');
+            if (!progress.exams) progress.exams = [];
+            progress.exams.push({ type, score, date: new Date().toLocaleDateString(), user: currentUser });
+            localStorage.setItem('commSkillsProgress', JSON.stringify(progress));
+        }
+
+        function updateProgressDashboard() {
+            let progress = JSON.parse(localStorage.getItem('commSkillsProgress') || '{}');
+            const exams = progress.exams || [];
+            document.getElementById('exams-completed').textContent = exams.length;
+            const avgScore = exams.length > 0 ? Math.round(exams.reduce((sum, e) => sum + e.score, 0) / exams.length) : 0;
+            document.getElementById('avg-score').textContent = avgScore + '%';
+            const mockTests = exams.filter(e => e.type === 'mock' && e.score >= 70);
+            document.getElementById('certs-earned').textContent = mockTests.length;
+            
+            let moduleProgressHtml = '';
+            Object.keys(moduleData).forEach((key, i) => {
+                const moduleExams = exams.filter(e => e.type === 'daily');
+                const percent = moduleExams.length > 0 ? Math.round((i + 1) / 5 * 100) : 0;
+                moduleProgressHtml += '<div style="margin-bottom: 20px;">';
+                moduleProgressHtml += '<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><strong>' + moduleData[key].name + '</strong><span>' + percent + '%</span></div>';
+                moduleProgressHtml += '<div class="progress-bar" style="background: #e0e0e0; height: 10px;"><div class="progress-fill" style="width: ' + percent + '%; background: linear-gradient(90deg, #667eea, #764ba2);"></div></div>';
+                moduleProgressHtml += '</div>';
+            });
+            document.getElementById('module-progress-list').innerHTML = moduleProgressHtml;
+            document.getElementById('modules-completed').textContent = exams.length > 0 ? Math.min(5, Math.floor(exams.length / 3)) : 0;
+        }
+    </script>
+</body>
+</html>
